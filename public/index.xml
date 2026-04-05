@@ -1,3 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Home on Two Pipes and a Drum</title><link>https://www.twopipesandadrum.com/</link><description>Recent content in Home on Two Pipes and a Drum</description><generator>Hugo</generator><language>en</language><atom:link href="https://www.twopipesandadrum.com/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://www.twopipesandadrum.com/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.twopipesandadrum.com/about/</guid><description>&lt;p&gt;Two Pipes and a Drum is a Scottish Highland pipes and drum trio based in Southeast Michigan. We specialize in providing high-quality bagpipe and drum performances for a variety of events, including weddings, funerals, parades, and other special occasions. Our trio consists of two pipers and one drummer, providing a full and authentic sound that is sure to impress your guests.&lt;/p&gt;</description></item><item><title>Contact Details</title><link>https://www.twopipesandadrum.com/contact/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.twopipesandadrum.com/contact/</guid><description>&lt;p&gt;We would love to play at your next event! Reach out to us for booking inquiries, rates, and availability.&lt;/p&gt;
-&lt;h3 id="general-inquiries"&gt;General Inquiries&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;Email:&lt;/strong&gt; &lt;a href="mailto:contact@twopipesandadrum.com?subject=Booking%20Inquiry"&gt;contact@twopipesandadrum.com&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on Two Pipes and a Drum</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content in Home on Two Pipes and a Drum</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;p&gt;Two Pipes and a Drum is a Scottish Highland pipes and drum trio based in Southeast Michigan. We specialize in providing high-quality bagpipe and drum performances for a variety of events, including weddings, funerals, parades, and other special occasions. Our trio consists of two pipers and one drummer, providing a full and authentic sound that is sure to impress your guests.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Contact Details</title>
+      <link>http://localhost:1313/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/contact/</guid>
+      <description>&lt;p&gt;We would love to play at your next event! Reach out to us for booking inquiries, rates, and availability.&lt;/p&gt;&#xA;&lt;h3 id=&#34;general-inquiries&#34;&gt;General Inquiries&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Email:&lt;/strong&gt; &lt;a href=&#34;mailto:contact@twopipesandadrum.com?subject=Booking%20Inquiry&#34;&gt;contact@twopipesandadrum.com&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
