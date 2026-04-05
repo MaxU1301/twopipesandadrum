@@ -1,0 +1,30 @@
+baseURL = "https://twopipesandadrum.com/"
+title = "Two Pipes and a Drum"
+
+theme = "ananke"
+
+# Site configuration
+[params]
+env = "production"
+description = "Scottish highland pipes and drum trio"
+custom_css = ["css/custom.css"]
+favicon = "/favicon.png"
+
+[menu]
+[[menu.main]]
+name = "About Us"
+url = "/about/"
+weight = 1
+
+[[menu.main]]
+name = "Contact Us"
+url = "/contact/"
+weight = 2
+
+[[menu.main]]
+name = "Instagram"
+url = "https://www.instagram.com/2_pipes_and_a_drum?igsh=MTd3ZWpuazF3NGdxcg=="
+weight = 3
+
+[markup.goldmark.renderer]
+unsafe = true

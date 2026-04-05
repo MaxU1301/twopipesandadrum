@@ -1,0 +1,113 @@
+{{ define "header" }}
+{{ $featured := .Params.featured_image | default "/images/cover.svg" }}
+{{ $featuredText := .Params.featured_image_text | default "/images/cover-text.svg" }}
+<header class="bg-center cover-fixed vh-100 relative cover-logo-header" style="background-image: url('{{ $featured }}');">
+  <!-- Dimming overlay initialized to opacity 0 -->
+  <div id="scroll-overlay" class="absolute top-0 left-0 right-0 bottom-0 bg-black"
+    style="opacity: 0; pointer-events: none; transition: opacity 0.1s ease-out;"></div>
+
+  <!-- Center text image container (it will scroll with the header element) -->
+  <div class="absolute top-0 left-0 right-0 bottom-0 w-100 h-100 z-1 pointer-events-none flex flex-column">
+    <!-- Navbar spacer to ensure text is perfectly centered in the remaining space if needed -- or just center exactly vertically -->
+    <div class="flex-grow-1 flex items-center justify-center cover-text-container" style="padding-top: var(--text-vertical-push);">
+      <img src="{{ $featuredText }}" alt="Two Pipes and a Drum" class="cover-text-img max-h-100" />
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <div id="navbar-container" class="fixed top-0 w-100 z-5" style="transition: background-color 0.3s ease;">
+    {{ partials.Include "site-navigation.html" . }}
+  </div>
+
+  <!-- Scroll down chevron -->
+  <div id="scroll-chevron" class="absolute bottom-2 w-100 flex justify-center z-2 pointer-events-none"
+    style="transition: opacity 0.1s ease-out;">
+    <svg onclick="window.scrollBy({ top: window.innerHeight * 0.7, behavior: 'smooth' })"
+      class="chevron-bounce w3 h3 white-70" style="pointer-events: auto; cursor: pointer;"
+      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </div>
+</header>
+
+<script>
+  document.addEventListener("scroll", function () {
+    var overlay = document.getElementById("scroll-overlay");
+    var navbar = document.getElementById("navbar-container");
+    var chevron = document.getElementById("scroll-chevron");
+    if (!overlay || !navbar) return;
+    var maxScroll = window.innerHeight * 0.5; // reaches max grey by 50% scroll
+    var opacity = Math.min(window.scrollY / maxScroll, 0.7); // Cap opacity at 0.7
+    overlay.style.opacity = opacity;
+
+    if (chevron) {
+      var chevronOpacity = Math.max(1 - (window.scrollY / (window.innerHeight * 0.2)), 0);
+      chevron.style.opacity = chevronOpacity;
+    }
+
+    // Keep the navbar completely transparent while it's over the header image to prevent double-dimming.
+    // The visual fade effect will naturally show "through" the transparent navbar from the scroll-overlay behind it.
+    // Once we scroll past the header, apply a solid background so it remains legible over the white content.
+    if (window.scrollY > window.innerHeight - 80) {
+      navbar.style.backgroundColor = "rgba(19, 19, 19, 0.9)";
+    } else {
+      navbar.style.backgroundColor = "transparent";
+    }
+  });
+</script>
+{{ end }}
+
+{{ define "main" }}
+{{- $config := site.Params.ananke.home -}}
+{{- $text_alignment := "tc-l" -}}
+{{- if eq $config.content_alignment "left" -}}
+{{- $text_alignment = "tl-l" -}}
+{{- else if eq $config.content_alignment "right" -}}
+{{- $text_alignment = "tr-l" -}}
+{{- end -}}
+
+{{- $textColor := $.Param "text_color" | compare.Default "mid-gray" -}}
+<article
+  class="cf ph3 ph5-l pv3 pv4-l f4 {{ $text_alignment }} center measure-wide lh-copy nested-links {{ $textColor }}">
+  {{ .Content }}
+</article>
+
+{{/* Define a section to pull recent posts from. For Hugo 0.20 this will default to the section with the most number of
+pages. */}}
+{{ $mainSections := site.Params.mainSections | compare.Default (collections.Slice "post") }}
+{{ $show_recent_posts := site.Params.ananke.show_recent_posts }}
+{{ $section := collections.Where $.Site.RegularPages "Section" "in" $mainSections }}
+{{ $section_count := len $section }}
+
+{{ if and ($show_recent_posts) (compare.Ge $section_count 1) }}
+<div class="pa3 pa4-ns w-100 w-70-ns center">
+  {{ $n_posts := $.Param "recent_posts_number" | compare.Default 3 }}
+
+  <section class="w-100 mw8">
+    {{/* Range through the first $n_posts items of the section */}}
+    {{ range (collections.First $n_posts $section) }}
+    <div class="w-100 mb4 relative">
+      {{ .Render "summary-with-image" }}
+    </div>
+    {{ end }}
+  </section>
+
+  {{ if compare.Ge $section_count (math.Add $n_posts 1) }}
+  <section class="w-100">
+    <h1 class="f3">{{ lang.Translate "more" }}</h1>
+    {{/* Now, range through the next four after the initial $n_posts items. Nest the requirements, "after" then "first"
+    on the outside */}}
+    {{ range (collections.First 4 (collections.After $n_posts $section)) }}
+    {{- $directionClass := compare.Conditional (compare.Eq $.Site.Language.LanguageDirection "rtl") "ml3" "mr3" -}}
+    <h2 class="f5 fw4 mb4 dib {{ $directionClass }}">
+      <a href="{{ .RelPermalink }}" class="link black dim">
+        {{ .Title }}
+      </a>
+    </h2>
+    {{ end }}
+  </section>
+  {{ end }}
+
+</div>
+{{ end }}
+{{ end }}

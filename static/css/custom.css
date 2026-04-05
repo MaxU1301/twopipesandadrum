@@ -1,0 +1,207 @@
+/* Ensure all typography uses the uniform san-serif site font (Avenir) instead of serif like Athelas */
+.athelas,
+.serif {
+  font-family: "Avenir Next", "Avenir", sans-serif !important;
+}
+
+/* Make headers and emphasized text step up in thickness without being fully bold (700) */
+body>main article header h1,
+body>main article h1 {
+  font-weight: 200 !important;
+  /* Extra Light */
+}
+
+body>main article h2 {
+  font-weight: 300 !important;
+  /* Light */
+}
+
+body>main article h3 {
+  font-weight: 400 !important;
+  /* Normal */
+}
+
+body>main article strong {
+  font-weight: 500 !important;
+  /* Medium (thicker than normal prose, but not bold) */
+}
+
+/* Increase desktop lateral margins on content pages to better match the main page */
+@media screen and (min-width: 769px) {
+  body>main article.pv5 {
+    max-width: 42rem !important;
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+  }
+
+  /* Make main page preview text same size (1.25rem) and font as content pages */
+  .f6.f5-l.nested-copy-line-height {
+    font-size: 1.25rem !important;
+    font-family: "Avenir Next", "Avenir", sans-serif !important;
+  }
+}
+
+.cover-fixed {
+  background-attachment: fixed !important;
+}
+
+/* Fix for iOS Safari (including iPad) where fixed backgrounds are positioned relative to the whole document rather than the viewport */
+@supports (-webkit-touch-callout: none) {
+  .cover-fixed {
+    background-attachment: scroll !important;
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-15px);
+  }
+
+  60% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes fadeOutChevron {
+  to {
+    opacity: 0.2;
+  }
+}
+
+.chevron-bounce {
+  /* Bounces 4 times on page load then stops, then fades to 50% opacity */
+  animation: bounce 2s 4 forwards, fadeOutChevron 1s 8s forwards;
+}
+
+/* Mobile styling */
+:root {
+  /* ADJUST THE SIZING AND POSITION OF THE BACKGROUND LOGO HERE */
+  /* Size: controls how large the centered square logo is */
+  --desktop-cover-size: 40vmin;
+  --mobile-cover-size: 60vmin;
+  /* Logo position: 50% is center, < 50% moves it up, > 50% moves it down */
+  --logo-vertical-position: 35%;
+
+  /* ADJUST THE WIDTH AND VERTICAL PUSH OF THE COVER TEXT IMAGE HERE */
+  /* Width: Defaults to 100%. Lower it if you want the text image smaller */
+  --desktop-cover-text-width: 40%;
+  --mobile-cover-text-width: 80%;
+  --mobile-landscape-cover-text-width: 60vh;
+  /* Text push: controls how far down the text is pushed (in viewport height) */
+  --text-vertical-push: 40vh;
+}
+
+.cover-text-img {
+  width: var(--desktop-cover-text-width);
+  max-width: 100%;
+}
+
+.cover-logo-header {
+  background-color: #131313 !important;
+  background-size: var(--desktop-cover-size) !important;
+  background-position: center var(--logo-vertical-position) !important;
+  background-repeat: no-repeat !important;
+}
+
+@media screen and (max-width: 768px) {
+
+  html,
+  body {
+    background-color: #131313 !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+
+  body>main {
+    background-color: #f4f4f4 !important;
+    display: flow-root !important;
+  }
+
+  .cover-fixed {
+    background-size: var(--mobile-cover-size) !important;
+    background-color: #131313 !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-position: center var(--logo-vertical-position) !important;
+    overflow-x: hidden !important;
+  }
+
+  .cover-text-img {
+    width: var(--mobile-cover-text-width) !important;
+    max-width: none !important;
+  }
+
+  /* Specific targeting for iOS devices on mobile */
+  @supports (-webkit-touch-callout: none) {
+    .cover-fixed {
+      height: 110vh !important;
+      background-position: center calc(var(--logo-vertical-position) - 5vh) !important;
+    }
+
+    .cover-fixed>.z-1.flex-column {
+      height: 100vh !important;
+    }
+
+    #scroll-chevron {
+      transform: translateY(-10vh) !important;
+    }
+  }
+
+  /* Compact the mobile navigation menu to remove excessive height and blank space */
+  header nav {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+
+  header nav ul {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0rem !important;
+  }
+
+  /* Fix text spacing on subpages: give text breathing room from header and screen edges */
+  body>main article.pv5 {
+    padding-top: 2.5rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  body>main .mt4 {
+    margin-top: 2rem !important;
+  }
+
+  /* Make mobile text size consistent (f5 / 1rem) for preview text and page content */
+  .nested-copy-line-height.f6,
+  .nested-copy-line-height.f4,
+  body>main article.f4,
+  body>main article .f4 {
+    font-size: 1rem !important;
+  }
+}
+
+/* Unify the header and footer to match the #131313 theme overflow color */
+header .bg-black,
+footer.bg-black {
+  background-color: #131313 !important;
+}
+
+/* Hide breadcrumbs on subpages */
+aside.instapaper_ignoref {
+  display: none !important;
+}
+
+/* Limit text size on landscape oriented phones to prevent overflowing vertical space */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .cover-text-img {
+    width: var(--mobile-landscape-cover-text-width) !important;
+    max-width: none !important;
+  }
+}
